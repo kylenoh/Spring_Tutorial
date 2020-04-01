@@ -14,7 +14,4 @@ public class Phone {
 	public void setBattery(Battery battery) {
 		this.battery = battery;
 	}
-	
-	
-	
 }
