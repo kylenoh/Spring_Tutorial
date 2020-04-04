@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+ 		http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<bean id="informationService" class="lesson02_DI_Maven_XmlConfig_Division_DTO.EDUInformation">
+		<property name="info">
+			<value>Education Management System program</value>
+		</property>
+		<property name="copyRight">
+			<value>COPYRIGHT(C) 2020 EMS CO., LTD. ALL RIGHT RESERVED. CONTACT KYLE FOR MORE INFORMATION.</value>
+		</property>
+		<property name="version">
+			<value>The version is 1.0</value>
+		</property>
+		<property name="developers">
+			<list>
+				<value>Kyle</value>
+				<value>Joy</value>
+				<value>Oraf</value>
+			</list>
+		</property>
+		<property name="administrators">
+			<map>
+				<entry>
+					<key>
+						<value>Kyle</value>
+					</key>
+					<value>Kyley@springPjt.org</value>
+				</entry>
+				<entry>
+					<key>
+						<value>Joy</value>
+					</key>
+					<value>Joy@springPjt.org</value>
+				</entry>
+			</map>
+		</property>
+		<property name="dbInfo">
+			<map>
+				<entry>
+					<key>
+						<value>dev</value>
+					</key>
+					<ref bean="InfoDev"/>
+				</entry>
+				<entry>
+					<key>
+						<value>real</value>
+					</key>
+					<ref bean="InfoProd"/>
+				</entry>
+			</map>
+		</property>
+	</bean>
+	
+</beans>
