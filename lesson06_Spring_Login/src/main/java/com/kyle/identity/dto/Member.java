@@ -8,6 +8,11 @@ public class Member {
 	private String member_name;
 	private String member_mail;
 
+//	기본 생성자를 만듭니다.
+	public Member() {
+		// TODO Auto-generated constructor stub
+	}
+	
 //	Member 호출 시, 값을 담을 수 있는 커스텀 생성자를 만듭니다.
 	public Member(String member_id, String member_pw, String member_pwChk, String member_name, String member_mail) {
 		super();
