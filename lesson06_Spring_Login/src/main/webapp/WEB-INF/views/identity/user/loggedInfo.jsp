@@ -5,6 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link rel="stylesheet" type="text/css" href="resources/css/common.css" />
 </head>
 <body>
 	<h3>로그인 정보 출력</h3>
@@ -17,18 +18,6 @@
 					<td>
 						${member.member_id}
 					 </td>
-				</tr>
-				<tr>
-					<td>PW</td>
-					<td>
-						${member.member_pw}
-					</td>
-				</tr>
-				<tr>
-					<td>PW확인</td>
-					<td>
-						${member.member_pwChk}
-					</td>
 				</tr>
 				<tr>
 					<td>NAME</td>
@@ -46,6 +35,9 @@
 		
 		<hr>
 		
-		<a href="/login/portal">메인 페이지 이동</a>
+		<a href="/login/portal">메인 페이지 이동</a>	<br>
+		<a href="/login/callUpdate">수정 페이지 이동</a>	<br>
+		<a href="/login/logout">로그 아웃</a>	<br>
+		
 </body>
 </html>
