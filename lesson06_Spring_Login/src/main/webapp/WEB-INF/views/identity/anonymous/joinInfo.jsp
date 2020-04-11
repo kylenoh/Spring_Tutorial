@@ -5,35 +5,37 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link rel="stylesheet" type="text/css" href="resources/css/common.css" />
 </head>
 <body>
-	<h3>로그인 정보 출력</h3>
-	
+			<h3>회원가입정보</h3>
+
 			<table>
 				<tr>
 					<td>ID</td>
 					<td>
-						${sessionMember.member_id}
+						${member.member_id}
 					 </td>
 				</tr>
 				<tr>
 					<td>NAME</td>
 					<td>
-						${sessionMember.member_name}
+						${member.member_name}
 					</td>
 				</tr>
 				<tr>
 					<td>MAIL</td>
 					<td>
-						${sessionMember.member_mail}
+						${member.member_mail}
 					</td>
 				</tr>
 			</table>
 		
 		<hr>
 		
-		<a href="/login/portal">메인 페이지 이동</a>	<br>
+		<P>  The time on the server is ${serverTime}. </P>
 		
+		<a href="/login/portal">메인 페이지 이동</a>	<br>
 		
 </body>
 </html>

@@ -1,12 +1,18 @@
 package com.kyle.identity;
 
+import java.text.DateFormat;
+import java.util.Date;
+import java.util.Locale;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.kyle.identity.dto.Member;
 import com.kyle.identity.serviceImpl.MemberServiceImpl;
@@ -17,25 +23,48 @@ public class MemberController {
 	@Autowired
 	MemberServiceImpl memberService;
 	
+	@RequestMapping(value = "/", method = RequestMethod.GET)
+	public String index() {
+		return "/portal/main";
+	}
+	
+	@ModelAttribute("path")
+	public String getContextPath(HttpServletRequest request) {
+		return request.getContextPath();
+//		/login 을 출력합니다
+	}
+	
+	@ModelAttribute("serverTime")
+	public String getServerTime(Locale locale) {
+		
+		Date date = new Date();
+		DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, locale);
+		
+		return dateFormat.format(date);
+	}
+	
 	@RequestMapping(value = "/callJoin", method = RequestMethod.GET)
 	public String callJoin() {
 		return "identity/anonymous/join";
 	}
 	
 	@RequestMapping(value = "/callLogin", method = RequestMethod.GET)
-	public String calllogin() {
+	public String calllogin(HttpServletRequest request) {
 		return "identity/user/login";
 	}
 	
-	@RequestMapping(value = "/callUpdate", method = RequestMethod.GET)
-	public String callUpdate(HttpServletRequest request) {
+	@RequestMapping(value = "/callModify", method = RequestMethod.GET)
+	public ModelAndView callUpdate(HttpServletRequest request) {
 		
 		HttpSession session = request.getSession();
-		Member member = (Member) session.getAttribute("member");
+		Member member = (Member) session.getAttribute("sessionMember");
 		
-		memberService.getMemberById(member);
+		ModelAndView mv = new ModelAndView();
+		mv.addObject("sessionMember", memberService.getMemberById(member));
 		
-		return "identity/user/loggedInfoUpdate";
+		mv.setViewName("/identity/user/Modify");
+		
+		return mv;
 	}
 	
 	@RequestMapping(value = "/logout", method = RequestMethod.GET)
@@ -43,8 +72,10 @@ public class MemberController {
 		
 		session.invalidate();
 		
-		return "portal/main";
+		return "identity/user/logout";
 	}
+	
+
 	
 /*----------------------------------------------------------------------------------------*/
 	@RequestMapping(value = "/memberInsert", method = RequestMethod.POST)
@@ -52,41 +83,48 @@ public class MemberController {
 		
 		memberService.memberInsert(member.getMember_id(), member.getMember_pw(), member.getMember_pwChk(), member.getMember_name(), member.getMember_mail());
 		
-		return "portal/main";
+		return "identity/anonymous/joinInfo";
 	}
 	
 	@RequestMapping(value = "/memberModify", method = RequestMethod.POST)
-	public String Modify(HttpServletRequest request, Member member) {
+	public ModelAndView Modify(HttpServletRequest request, Member member) {
 		
+		ModelAndView mv = new ModelAndView();
 		HttpSession session = request.getSession();
 		
-		memberService.memberUpdate(member);
+		Member mem = memberService.memberUpdate(member);
 		
-		session.setAttribute("member", member);
+		if(mem == null) {
+			mv.setViewName("/identity/user/Modify");
+		} else { 
+			session.setAttribute("sessionMember", mem);
+			mv.setViewName("/identity/user/ModifyInfo");
+		}
 		
-		return "identity/user/loggedInfo";
+		return mv;
 	}
 	
 	@RequestMapping(value = "/memberDelete", method = RequestMethod.GET)
 	public String Delete(HttpServletRequest request) {
 		
 		HttpSession session = request.getSession();
-		Member member = (Member) session.getAttribute("member");
-		
-		System.out.println(member.getMember_id());
-		System.out.println(member.getMember_pw());
+		Member member = (Member) session.getAttribute("sessionMember");
 		
 		memberService.memberDelete(member);
+		session.invalidate();
 		
-		return "portal/main";
+		return "identity/user/logout";
 	}
 	
 	@RequestMapping(value="/login",method=RequestMethod.POST)
 	public String login(Member member, HttpSession session) {
 		
-		memberService.getMemberById(member);
+		Member mem = memberService.getMemberById(member);
+		session.setAttribute("sessionMember", mem);
 		
-		session.setAttribute("member", member);
+//		if(mem == null) {
+//			return "identity/user/login";
+//		}
 		
 		return "identity/user/loggedInfo";
 	}

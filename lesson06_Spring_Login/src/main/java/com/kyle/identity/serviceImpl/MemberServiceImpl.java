@@ -16,11 +16,11 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public void memberInsert(String member_id, String member_pw, String member_pwChk, String member_name,
 			String member_mail) {
+		
 		if (member_pw.equals(member_pwChk)) {
-			System.out.println("비밀번호가 일치합니다.");
-			memberDao.insert(member_id, member_pw, member_pwChk, member_name, member_mail);
+			memberDao.memberInsert(member_id, member_pw, member_pwChk, member_name, member_mail);
 		} else {
-			System.out.println("비밀번호 오류입니다.");
+			
 		}
 
 	}
@@ -28,15 +28,15 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public Member getMemberById(Member member) {
 
-		memberDao.memberSelect(member);
+		Member mem = memberDao.memberSelect(member);
 		
-		if (member == null) {
+		if (mem == null) {
 			System.out.println("Login Fail!!");
 		} else {
 			System.out.println("Login Success!!");
 		}
 
-		return member;
+		return mem;
 	}
 
 	@Override
