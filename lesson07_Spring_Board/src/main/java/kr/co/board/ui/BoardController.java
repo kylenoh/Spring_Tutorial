@@ -12,11 +12,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public class BoardController {
 	Logger log = LoggerFactory.getLogger(this.getClass());
 
-
 	@RequestMapping(value = "/callBoardList", method = RequestMethod.GET)
-	public String home(Model model) {
+	public String BoardList(Model model) {
 		log.info("인터셉터 테스트!");
-		
 		return "board/boardList";
 	}
 }

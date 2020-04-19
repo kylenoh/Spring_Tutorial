@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMapConfig PUBLIC "-//ibatis.apache.org//DTD SQL Map Config 2.0//EN"
+"http://ibatis.apache.org/dtd/sql-map-config-2.dtd">
+
+<sqlMapConfig>
+	<settings useStatementNamespaces="false"
+			  defaultStatementTimeout="3600"
+			  enhancementEnabled = "true"			  
+			  lazyLoadingEnabled="true"
+	/> 
+	<resultObjectFactory type="com.nsc.common.EnhancerEntityProxyFactory"/>
+	<sqlMap resource="sql/ibatis2/oracle/mapping-ibatis2-common.xml"/>
+	<sqlMap resource="sql/ibatis2/oracle/mapping-ibatis2-user.xml"/>
+	<sqlMap resource="sql/ibatis2/oracle/mapping-ibatis2-menu.xml"/>
+	<sqlMap resource="sql/ibatis2/oracle/mapping-ibatis2-file.xml"/>
+	<sqlMap resource="sql/ibatis2/oracle/mapping-ibatis2-role.xml"/>
+	<sqlMap resource="sql/ibatis2/oracle/mapping-ibatis2-sysResource.xml"/>
+	<sqlMap resource="sql/ibatis2/oracle/mapping-ibatis2-workGroup.xml"/>
+	<sqlMap resource="sql/ibatis2/oracle/mapping-ibatis2-sys.xml"/>
+	<sqlMap resource="sql/ibatis2/oracle/mapping-ibatis2-batchLog.xml"/>
+	<sqlMap resource="sql/ibatis2/oracle/mapping-ibatis2-batchService.xml"/>
+	<sqlMap resource="sql/ibatis2/oracle/mapping-ibatis2-licensekey.xml"/>
+	<sqlMap resource="sql/ibatis2/oracle/mapping-ibatis2-tcmCode.xml"/>
+	<sqlMap resource="sql/ibatis2/oracle/mapping-ibatis2-server.xml"/>
+	<sqlMap resource="sql/ibatis2/oracle/mapping-ibatis2-system.xml"/>
+	<sqlMap resource="sql/ibatis2/oracle/mapping-ibatis2-service.xml"/>
+	<sqlMap resource="sql/ibatis2/oracle/mapping-ibatis2-serviceLog.xml"/>
+	<sqlMap resource="sql/ibatis2/oracle/mapping-ibatis2-portal.xml"/>
+	
+</sqlMapConfig>
