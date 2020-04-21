@@ -35,5 +35,6 @@
 			<beans:bean class="kr.co.common.interceptor.LoggingInterceptor"/>
 		</interceptor>
 	</interceptors>
+	
 
 </beans:beans>
