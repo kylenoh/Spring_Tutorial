@@ -2,8 +2,27 @@
 <!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
 "http://ibatis.apache.org/dtd/sql-map-2.dtd">
 
-<sqlMap namespace="kr.co.board.entity.Board">
+<sqlMap namespace="Board">
 
+	<typeAlias alias="Board" type="kr.co.board.entity.Board" />
 
-		
+	<resultMap id="boardResultMap" class="Board">
+		<result property="TB_TITLE" column="TB_TITLE" />
+		<result property="TB_CONTENTS" column="TB_CONTENTS" />
+		<result property="TB_CONTENT_CNT" column="TB_CONTENT_CNT" />
+		<result property="TB_WRITE_DTM" column="TB_WRITE_DTM" />
+	</resultMap>
+
+	<select id="selectBoardList" resultMap="boardResultMap" remapResults="false">
+		<![CDATA[
+			SELECT 
+				TB_TITLE,
+				TB_CONTENTS,
+				TB_CONTENT_CNT,
+				TB_WRITE_DTM
+			FROM
+				TB_BOARD
+			ORDER BY TB_IDX DESC
+		]]>
+	</select>
 </sqlMap>

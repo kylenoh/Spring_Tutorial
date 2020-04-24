@@ -8,6 +8,5 @@
 			  enhancementEnabled = "true"			  
 			  lazyLoadingEnabled="true"
 	/> 
-	<sqlMap resource="sql/ibatis2/oracle/mapping-ibatis2-common.xml"/>
 	<sqlMap resource="sql/ibatis2/oracle/mapping-ibatis2-board.xml"/>
 </sqlMapConfig>

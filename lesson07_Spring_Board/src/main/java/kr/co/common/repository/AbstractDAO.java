@@ -1,25 +1,20 @@
 package kr.co.common.repository;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.orm.ibatis.support.SqlMapClientDaoSupport;
-
-import com.ibatis.sqlmap.client.SqlMapClient;
+import org.springframework.orm.ibatis.SqlMapClientTemplate;
 
 @SuppressWarnings("deprecation")
-public class AbstractDAO extends SqlMapClientDaoSupport{
+public class AbstractDAO  {
 	protected Logger logger = LoggerFactory.getLogger(this.getClass());
-	
-	@Autowired
-	private SqlMapClient sql;
 
-	
-	public void setSuperSqlMapClient(SqlMapClient sqlMapClient) {
-		super.setSqlMapClient(sqlMapClient);
-	}
+	@Autowired private SqlMapClientTemplate sqlSession;
+
 	
 	protected void printQueryId(String queryId) {
 		if (logger.isDebugEnabled()) {
@@ -27,20 +22,31 @@ public class AbstractDAO extends SqlMapClientDaoSupport{
 		}
 	}
 
+	@SuppressWarnings("rawtypes")
+	public List selectList(String queryId){
+		printQueryId(queryId);
+		return sqlSession.queryForList(queryId);
+	}
+	
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	public List selectList(String queryId, Object params) {
+		printQueryId(queryId);
+		return (ArrayList<String>) sqlSession.queryForList(queryId, params);
+	}
+
 	public Object insert(String queryId, Object params) throws SQLException {
 		printQueryId(queryId);
-		return getSqlMapClientTemplate().queryForObject(queryId,params);
+		return sqlSession.insert(queryId, params);
 	}
 
 	public Object update(String queryId, Object params) throws SQLException {
 		printQueryId(queryId);
-		return sql.update(queryId, params);
+		return sqlSession.update(queryId, params);
 	}
 
 	public Object delete(String queryId, Object params) throws SQLException {
 		printQueryId(queryId);
-		return sql.delete(queryId, params);
+		return sqlSession.delete(queryId, params);
 	}
 
-	
 }
