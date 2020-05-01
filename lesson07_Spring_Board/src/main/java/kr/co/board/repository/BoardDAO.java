@@ -8,12 +8,15 @@ import org.springframework.stereotype.Repository;
 import kr.co.common.repository.AbstractDAO;
 
 @Repository
-public class BoardDAO extends AbstractDAO{
+public class BoardDAO extends AbstractDAO {
 
 	@SuppressWarnings("unchecked")
 	public List<Map<String, Object>> selectBoardList(Map<String, Object> map) {
-		return (List<Map<String, Object>>)selectList("selectBoardList");
+		return (List<Map<String, Object>>) selectList("selectBoardList");
+	}
 
+	public void insertBoard(Map<String, Object> map) throws Exception {
+		insert("insertBoard", map);
 	}
 
 }

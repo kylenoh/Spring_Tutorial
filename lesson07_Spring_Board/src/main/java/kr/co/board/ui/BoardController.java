@@ -32,8 +32,22 @@ public class BoardController {
 		return mv;
 	}
 
+	@RequestMapping(value = "/callBoardWrite")
+	public ModelAndView BoardWrite(CustomMap customMap) throws Exception {
+		ModelAndView mv = new ModelAndView("/board/boardWrite");
+		return mv;
+	}
+	
+	@RequestMapping(value = "/insertBoard")
+	public ModelAndView insertBoard(CustomMap customMap) throws Exception {
+		ModelAndView mv = new ModelAndView("redirect:/callBoardList");
+		boardService.insertBoard(customMap.getMap());
+		
+		return mv;
+	}
+	
 	@RequestMapping(value = "/callMapArgumentResolver")
-	public ModelAndView testMapArgumentResolver(CustomMap customMap) throws Exception {
+	public ModelAndView callMapArgumentResolver(CustomMap customMap) throws Exception {
 		ModelAndView mv = new ModelAndView("");
 		if (customMap.isEmpty() == false) {
 			Iterator<Entry<String, Object>> iterator = customMap.getMap().entrySet().iterator();

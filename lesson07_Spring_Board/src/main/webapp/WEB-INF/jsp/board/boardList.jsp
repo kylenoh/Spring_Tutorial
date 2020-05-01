@@ -49,7 +49,8 @@
 			</c:choose>
 		</tbody>
 	</table>
-
+	<br/>
+	<a href="callBoardWrite">글쓰기</a>
 
 
 </body>
