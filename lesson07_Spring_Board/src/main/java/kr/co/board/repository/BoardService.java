@@ -27,15 +27,18 @@ public class BoardService implements BoardServiceImpl {
 
 	@Override
 	public Map<String, Object> selectBoardDetail(Map<String, Object> map) throws Exception {
-		return null;
+		boardDAO.updateCnt(map);
+		return boardDAO.selectBoardDetail(map);
 	}
 
 	@Override
 	public void updateBoard(Map<String, Object> map) throws Exception {
+		boardDAO.updateBoard(map);
 	}
 
 	@Override
 	public void deleteBoard(Map<String, Object> map) throws Exception {
+		boardDAO.deleteBoard(map);
 	}
 
 }

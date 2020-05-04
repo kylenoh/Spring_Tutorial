@@ -46,6 +46,42 @@ public class BoardController {
 		return mv;
 	}
 	
+	@RequestMapping(value="/callBoardDetail")
+	public ModelAndView BoardDetail(CustomMap customMap) throws Exception{
+		ModelAndView mv = new ModelAndView("/board/boardDetail");
+		Map<String, Object> map = boardService.selectBoardDetail(customMap.getMap());
+		mv.addObject("map", map);
+		
+		return mv;
+	}
+	
+	@RequestMapping(value="/callBoardUpdate")
+	public ModelAndView BoardUpdate(CustomMap customMap) throws Exception{
+		ModelAndView mv = new ModelAndView("/board/boardUpdate");
+		Map<String, Object> map = boardService.selectBoardDetail(customMap.getMap());
+		mv.addObject("map", map);
+		
+		return mv;
+	}
+	
+	@RequestMapping(value="/updateBoard")
+	public ModelAndView updateBoard(CustomMap customMap) throws Exception{
+		ModelAndView mv = new ModelAndView("redirect:/callBoardDetail");
+		
+		boardService.updateBoard(customMap.getMap());
+		
+		mv.addObject("TB_IDX", customMap.get("TB_IDX"));
+		return mv;
+	}
+	
+	@RequestMapping(value="/deleteBoard")
+	public ModelAndView deleteBoard(CustomMap customMap) throws Exception{
+		ModelAndView mv = new ModelAndView("redirect:/callBoardList");
+		
+		boardService.deleteBoard(customMap.getMap());
+		
+		return mv;
+	}
 	@RequestMapping(value = "/callMapArgumentResolver")
 	public ModelAndView callMapArgumentResolver(CustomMap customMap) throws Exception {
 		ModelAndView mv = new ModelAndView("");

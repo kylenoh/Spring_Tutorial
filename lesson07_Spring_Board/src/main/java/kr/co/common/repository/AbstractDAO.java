@@ -3,6 +3,7 @@ package kr.co.common.repository;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -33,7 +34,19 @@ public class AbstractDAO  {
 		printQueryId(queryId);
 		return (ArrayList<String>) sqlSession.queryForList(queryId, params);
 	}
-
+	
+	@SuppressWarnings({ "unchecked" })
+	public Map<String, Object> selectByIdx(String queryId){
+		printQueryId(queryId);
+		return (Map<String, Object>) sqlSession.queryForObject(queryId);
+	}
+	
+	@SuppressWarnings({ "unchecked" })
+	public Map<String, Object> selectByIdx(String queryId, Object params){
+		printQueryId(queryId);
+		return (Map<String, Object>) sqlSession.queryForObject(queryId, params);
+	}
+	
 	public Object insert(String queryId, Object params) throws SQLException {
 		printQueryId(queryId);
 		return sqlSession.insert(queryId, params);

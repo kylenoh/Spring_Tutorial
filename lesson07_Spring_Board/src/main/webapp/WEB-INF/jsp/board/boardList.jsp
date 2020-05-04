@@ -33,7 +33,9 @@
 					<c:forEach items="${list }" var="row">
 						<tr>
 							<td>${row.TB_IDX }</td>
-							<td>${row.TB_TITLE }</td>
+							<td>
+								<a href="callBoardDetail?TB_IDX=${row.TB_IDX }">${row.TB_TITLE }</a>
+							</td>
 							<td>${row.TB_CONTENT_CNT }</td>
 							<td>
 								<fmt:formatDate value="${row.TB_WRITE_DTM }" pattern="yyyy-MM-dd KK:mm:ss"/>

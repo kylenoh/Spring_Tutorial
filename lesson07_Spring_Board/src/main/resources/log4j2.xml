@@ -8,16 +8,23 @@
 			<PatternLayout
 				pattern="%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n" />
 		</Console>
-		
+
+
+		<Console name="Console-infolog" target="SYSTEM_OUT">
+			<PatternLayout
+				pattern="%d{HH:mm:ss.SSS} %5p %m%n" />
+		</Console>
+
 		<!-- 파일을 생성 할 수 있습니다. -->
 		<File name="LogToFile" fileName="logs/app.log">
 			<PatternLayout>
 				<Pattern>%d %p %c{1.} [%t] %m%n</Pattern>
 			</PatternLayout>
 		</File>
-				<!-- 파일을 생성하며 패턴을 줄 수있습니다. -->
-		<RollingFile name="LogToRollingFile" fileName="logs/app.log"
-                    filePattern="logs/$${date:yyyy-MM}/app-%d{MM-dd-yyyy}-%i.log.gz">
+		<!-- 파일을 생성하며 패턴을 줄 수있습니다. -->
+		<RollingFile name="LogToRollingFile"
+			fileName="logs/app.log"
+			filePattern="logs/$${date:yyyy-MM}/app-%d{MM-dd-yyyy}-%i.log.gz">
 			<PatternLayout>
 				<Pattern>%d %p %c{1.} [%t] %m%n</Pattern>
 			</PatternLayout>
@@ -47,7 +54,7 @@
 		</Logger>
 
 		<Logger name="jdbc.sqlonly" level="info" additivity="false">
-			<AppenderRef ref="Console" />
+			<AppenderRef ref="Console-infolog" />
 		</Logger>
 
 		<Logger name="jdbc.resultsettable" level="info"

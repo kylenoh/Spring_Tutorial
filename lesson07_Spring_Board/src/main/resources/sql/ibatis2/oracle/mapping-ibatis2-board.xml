@@ -7,6 +7,7 @@
 	<typeAlias alias="Board" type="kr.co.board.entity.Board" />
 
 	<resultMap id="boardResultMap" class="Board">
+		<result property="TB_IDX" column="TB_IDX" />
 		<result property="TB_TITLE" column="TB_TITLE" />
 		<result property="TB_CONTENTS" column="TB_CONTENTS" />
 		<result property="TB_CONTENT_CNT" column="TB_CONTENT_CNT" />
@@ -15,13 +16,16 @@
 
 	<select id="selectBoardList" resultMap="boardResultMap" remapResults="false">
 		<![CDATA[
-			SELECT 
+			SELECT
+				TB_IDX,
 				TB_TITLE,
 				TB_CONTENTS,
 				TB_CONTENT_CNT,
 				TB_WRITE_DTM
 			FROM
 				TB_BOARD
+			WHERE 
+				TB_DEL_GB = 'N'
 			ORDER BY TB_IDX DESC
 		]]>
 	</select>
@@ -49,4 +53,50 @@
 		 ]]>
 	</insert>
 
+	<select id="selectBoardDetail" parameterClass="java.util.HashMap" resultClass="java.util.HashMap" remapResults="false">
+		<![CDATA[
+			SELECT
+				TB_IDX,
+				TB_TITLE,
+				TB_CONTENTS,
+				TB_CONTENT_CNT,
+				TB_WRITE_DTM,
+				TB_WRITE_ID
+			FROM
+				TB_BOARD
+			WHERE 
+				TB_IDX = #TB_IDX#
+		]]>
+	</select>
+	
+	<update id="updateCnt" parameterClass="java.util.HashMap">
+		<![CDATA[
+			UPDATE TB_BOARD 
+			SET
+				TB_CONTENT_CNT = NVL(TB_CONTENT_CNT, 0) + 1
+			WHERE
+				TB_IDX = #TB_IDX#
+		]]>
+	</update>
+	
+	<update id="updateBoard" parameterClass="java.util.HashMap">
+		<![CDATA[
+			UPDATE TB_BOARD 
+			SET
+				TB_TITLE = #TB_TITLE#,
+				TB_CONTENTS = #TB_CONTENTS#
+			WHERE
+				TB_IDX = #TB_IDX#
+		]]>
+	</update>
+	
+	<update id="deleteBoard" parameterClass="java.util.HashMap">
+		<![CDATA[
+			UPDATE TB_BOARD
+			SET
+				TB_DEL_GB = 'Y'
+			WHERE
+				TB_IDX = #TB_IDX#
+		]]>
+	</update>
 </sqlMap>

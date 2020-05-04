@@ -19,4 +19,19 @@ public class BoardDAO extends AbstractDAO {
 		insert("insertBoard", map);
 	}
 
+	public void updateCnt(Map<String, Object> map) throws Exception{
+		update("updateCnt", map);
+	}
+
+	public Map<String, Object> selectBoardDetail(Map<String, Object> map) throws Exception{
+		return (Map<String, Object>) selectByIdx("selectBoardDetail", map);
+	}
+	
+	public void updateBoard(Map<String, Object> map) throws Exception {
+		update("updateBoard", map);
+	}
+	
+	public void deleteBoard(Map<String, Object> map) throws Exception {
+		update("deleteBoard", map);
+	}
 }
